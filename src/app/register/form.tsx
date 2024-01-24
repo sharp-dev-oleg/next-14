@@ -6,9 +6,13 @@ import {Button} from "@nextui-org/button";
 import {Input, Chip} from "@nextui-org/react";
 import {register} from '@/app/api/register';
 
+interface FormState {
+  error: string
+}
+
 export default function Form() {
   const router = useRouter()
-  const [state, formAction] = useFormState<{error: ''}, FormData>(async (state, formData: FormData) => {
+  const [state, formAction] = useFormState<FormState, FormData>(async (state, formData: FormData) => {
     try {
       const response = await register(
         formData.get('username') as string,
@@ -29,7 +33,6 @@ export default function Form() {
     error: ''
   });
 
-  console.log('state', state);
   return (
     <form className="flex w-full md:w-1/2 flex-wrap gap-4" action={formAction}>
       <Input type="text" name="username" isRequired label="Username" placeholder="Enter your username"/>
