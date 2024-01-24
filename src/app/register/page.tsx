@@ -1,5 +1,5 @@
 import styles from './page.module.css'
-import Form from "@/app/test/form";
+import Form from "@/app/register/form";
 
 export default function Test() {
 

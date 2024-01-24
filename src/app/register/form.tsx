@@ -1,11 +1,13 @@
 'use client';
 
 import {useFormState} from 'react-dom';
+import { useRouter } from 'next/navigation'
 import {Button} from "@nextui-org/button";
 import {Input, Chip} from "@nextui-org/react";
 import {register} from '@/app/api/register';
 
 export default function Form() {
+  const router = useRouter()
   const [state, formAction] = useFormState<{error: ''}, FormData>(async (state, formData: FormData) => {
     try {
       const response = await register(
@@ -13,6 +15,7 @@ export default function Form() {
         formData.get('email') as string,
         formData.get('password') as string
       );
+      router.push('/');
       return {
         error: ''
       };
