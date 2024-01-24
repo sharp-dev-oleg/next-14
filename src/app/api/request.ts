@@ -12,5 +12,5 @@ export const request = async (method: string, url: string, data = {}) => {
   if (res.ok) {
     return res.json();
   }
-  return res.text();
+  throw new Error(await res.text());
 };
