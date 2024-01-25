@@ -1,22 +1,27 @@
 'use client';
 
 import {Button} from "@nextui-org/button";
-import {Input, Chip} from "@nextui-org/react";
-import {login} from "@/app/api/login";
+import {Input} from "@nextui-org/react";
+import {login, LoginResponse} from "@/app/api/login";
 import {useFormState} from "react-dom";
+
+interface LoginProps {
+  onLogin: (token: string) => void
+}
 
 interface FormState {
   error: string
 }
 
-export default function Login() {
+export default function Login({ onLogin }: LoginProps) {
   const [state, formAction] = useFormState<FormState, FormData>(async (state, formData: FormData) => {
     try {
       const response = await login(
         formData.get('email') as string,
         formData.get('password') as string
-      );
-      console.log('response', response);
+      ) as LoginResponse;
+      onLogin(response.id_token);
+
       return {
         error: ''
       };

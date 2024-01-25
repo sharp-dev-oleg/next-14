@@ -1,7 +1,11 @@
 'use server';
 import {request} from "./request";
 
-export const login = (email: string, password: string) => {
+export interface LoginResponse {
+  id_token: string;
+}
+
+export const login = async (email: string, password: string) => {
   const data = {
     email,
     password
