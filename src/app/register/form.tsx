@@ -1,7 +1,7 @@
 'use client';
 
 import {useFormState} from 'react-dom';
-import { useRouter } from 'next/navigation'
+import {useRouter} from 'next/navigation'
 import {Button} from "@nextui-org/button";
 import {Input, Chip} from "@nextui-org/react";
 import {register} from '@/app/api/register';
