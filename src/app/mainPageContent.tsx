@@ -29,7 +29,6 @@ export default function MainPageContent() {
   return token ?
     (
       <>
-        <Navbar/>
         <p>Logged in</p>
       </>
     ) : (

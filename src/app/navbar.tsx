@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Navbar as NextUiNavbar,
   NavbarBrand,
@@ -5,20 +7,35 @@ import {
   NavbarItem,
 } from "@nextui-org/react";
 import {Button} from "@nextui-org/button";
-import {useCallback} from "react";
+import {useCallback, useEffect, useState} from "react";
+import Link from "next/link";
 
 export default function Navbar() {
+  const [token, setToken] = useState('');
+
+  useEffect(() => {
+    setToken(localStorage.getItem('token') ?? '');
+  }, []);
+
   const exit = useCallback(() => {
-    'use client';
     localStorage.removeItem('token');
     location.reload();
   }, []);
 
+  if (!token) return null;
+
   return (
-    <NextUiNavbar className="-mt-24">
+    <NextUiNavbar>
       <NavbarBrand>
         <p className="font-bold text-inherit">Transactions</p>
       </NavbarBrand>
+      <NavbarContent className="gap-4" justify="center">
+        <NavbarItem>
+          <Link color="foreground" href="/createTransaction">
+            New transaction
+          </Link>
+        </NavbarItem>
+      </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>
           <Button onClick={exit} color="primary" href="#" variant="flat">Exit</Button>
