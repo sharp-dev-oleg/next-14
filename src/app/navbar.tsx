@@ -31,6 +31,11 @@ export default function Navbar() {
       </NavbarBrand>
       <NavbarContent className="gap-4" justify="center">
         <NavbarItem>
+          <Link color="foreground" href="/">
+            List
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
           <Link color="foreground" href="/createTransaction">
             New transaction
           </Link>
