@@ -3,7 +3,6 @@
 import {useCallback, useEffect, useState} from "react";
 import {getTransactions} from "@/app/api/transactions";
 import Login from "./login";
-import Navbar from "./navbar";
 import {Divider} from "@nextui-org/react";
 import Link from "next/link";
 

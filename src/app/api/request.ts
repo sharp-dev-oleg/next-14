@@ -13,5 +13,6 @@ export const request = async <T>(method: string, url: string, data: {} | null = 
   if (res.ok) {
     return res.json() as T;
   }
+
   throw new Error(await res.text());
 };
