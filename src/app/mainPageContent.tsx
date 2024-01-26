@@ -1,19 +1,21 @@
 'use client';
 
 import {useCallback, useEffect, useState} from "react";
-import {getTransactions} from "@/app/api/transactions";
-import Login from "./login";
+import {getTransactions, Transaction} from "@/app/api/transactions";
 import {Divider} from "@nextui-org/react";
 import Link from "next/link";
+import Login from "./login";
+import {Transactions} from "./transactions";
 
 export default function MainPageContent() {
   const [token, setToken] = useState('');
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
   useEffect(() => {
     const token = localStorage.getItem('token') ?? ''
     if (token) {
       (async () => {
         const transactions = await getTransactions(token);
-        console.log(transactions);
+        setTransactions(transactions?.trans_token ?? [])
       })();
     }
 
@@ -28,7 +30,7 @@ export default function MainPageContent() {
   return token ?
     (
       <>
-        <p>Logged in</p>
+        <Transactions transactions={transactions} />
       </>
     ) : (
       <>
