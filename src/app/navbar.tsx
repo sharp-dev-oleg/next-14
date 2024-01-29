@@ -11,21 +11,19 @@ import {useCallback, useEffect, useState} from "react";
 import Link from "next/link";
 import NavbarUser from "@/app/navbarUser";
 import {getUserInfo, UserInfo} from "@/api/userInfo";
+import {useToken} from "@/hooks/useToken";
 
 export default function Navbar() {
-  const [token, setToken] = useState('');
+  const {token} = useToken();
   const [userInfo, setUserInfo] = useState<UserInfo>();
 
   useEffect(() => {
-    const token = localStorage.getItem('token') ?? '';
-    setToken(token);
-
     (async () => {
       if (token) {
         setUserInfo((await getUserInfo(token)).user_info_token);
       }
     })();
-  }, []);
+  }, [token]);
 
   const exit = useCallback(() => {
     localStorage.removeItem('token');

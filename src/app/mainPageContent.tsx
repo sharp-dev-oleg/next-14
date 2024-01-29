@@ -6,21 +6,19 @@ import {Divider} from "@nextui-org/react";
 import Link from "next/link";
 import Login from "./login";
 import {Transactions} from "./transactions";
+import {useToken} from "@/hooks/useToken";
 
 export default function MainPageContent() {
-  const [token, setToken] = useState('');
+  const {token, setToken} = useToken();
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   useEffect(() => {
-    const token = localStorage.getItem('token') ?? ''
     if (token) {
       (async () => {
         const transactions = await getTransactions(token);
         setTransactions(transactions?.trans_token ?? [])
       })();
     }
-
-    setToken(token);
-  }, []);
+  }, [token]);
 
   const onLogin = useCallback((token: string) => {
     localStorage.setItem('token', token);
