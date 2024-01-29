@@ -10,7 +10,7 @@ import {Button} from "@nextui-org/button";
 import {useCallback, useEffect, useState} from "react";
 import Link from "next/link";
 import NavbarUser from "@/app/navbarUser";
-import {getUserInfo, UserInfo} from "@/app/api/userInfo";
+import {getUserInfo, UserInfo} from "@/api/userInfo";
 
 export default function Navbar() {
   const [token, setToken] = useState('');

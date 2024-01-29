@@ -1,5 +1,5 @@
 import {User} from "@nextui-org/react";
-import {UserInfo} from "@/app/api/userInfo";
+import {UserInfo} from "@/api/userInfo";
 
 interface UserInfoProps {
   userInfo?: UserInfo

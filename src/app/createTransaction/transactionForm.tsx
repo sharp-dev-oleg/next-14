@@ -3,7 +3,7 @@
 import {useFormState} from 'react-dom';
 import {Button} from "@nextui-org/button";
 import {Input, Chip} from "@nextui-org/react";
-import {createTransaction} from "@/app/api/createTransaction";
+import {createTransaction} from "@/api/createTransaction";
 import {useRef} from "react";
 
 interface FormState {

@@ -1,7 +1,7 @@
 'use client';
 
 import {useCallback, useEffect, useState} from "react";
-import {getTransactions, Transaction} from "@/app/api/transactions";
+import {getTransactions, Transaction} from "@/api/transactions";
 import {Divider} from "@nextui-org/react";
 import Link from "next/link";
 import Login from "./login";

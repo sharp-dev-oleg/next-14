@@ -2,7 +2,7 @@
 
 import {Button} from "@nextui-org/button";
 import {Input} from "@nextui-org/react";
-import {login, LoginResponse} from "@/app/api/login";
+import {login, LoginResponse} from "@/api/login";
 import {useFormState} from "react-dom";
 
 interface LoginProps {
