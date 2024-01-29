@@ -26,7 +26,6 @@ export default function Navbar() {
   }, [token]);
 
   const exit = useCallback(() => {
-    localStorage.removeItem('token');
     setToken('');
   }, [setToken]);
 

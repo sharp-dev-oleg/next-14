@@ -3,11 +3,16 @@
 
 import {NextUIProvider} from '@nextui-org/react'
 import {TokenProvider} from "@/hooks/useToken";
+import {PropsWithChildren} from "react";
 
-export function Providers({children}: { children: React.ReactNode }) {
+interface ProvidersProps extends PropsWithChildren {
+  initialToken: string
+}
+
+export function Providers({children, initialToken}: ProvidersProps) {
   return (
     <NextUIProvider>
-      <TokenProvider>
+      <TokenProvider initialToken={initialToken}>
         {children}
       </TokenProvider>
     </NextUIProvider>

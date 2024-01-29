@@ -18,10 +18,12 @@ export default function MainPageContent() {
         setTransactions(transactions?.trans_token ?? [])
       })();
     }
+    else {
+      setTransactions([]);
+    }
   }, [token]);
 
   const onLogin = useCallback((token: string) => {
-    localStorage.setItem('token', token);
     setToken(token);
   }, [setToken]);
 

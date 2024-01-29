@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import {Providers} from "./providers";
 import './globals.css'
 import Navbar from "@/app/navbar";
+import {cookies} from "next/headers";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,10 +17,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const token = cookies().get('token')?.value ?? ''
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Providers>
+        <Providers initialToken={token}>
           <Navbar />
           {children}
         </Providers>

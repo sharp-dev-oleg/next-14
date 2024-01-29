@@ -1,14 +1,22 @@
-import {createContext, useContext, useState, PropsWithChildren} from "react";
+import {createContext, useContext, useState, PropsWithChildren, useCallback} from "react";
 
 const TokenContext = createContext({
   token: '',
   setToken: (token: string) => {}
 });
 
-export const TokenProvider = ({ children }: PropsWithChildren) => {
-  const [token, setToken] = useState(() => (
-    localStorage.getItem('token') ?? ''
-  ));
+interface TokenProvider extends PropsWithChildren {
+  initialToken: string
+}
+
+export const TokenProvider = ({ initialToken, children }: TokenProvider) => {
+  const [token, _setToken] = useState(initialToken);
+  const setToken = useCallback((newToken: string) => {
+    _setToken(newToken);
+    // @ts-ignore
+    window.cookieStore?.set('token', newToken);
+  }, []);
+
   return (
     <TokenContext.Provider value={{ token, setToken }}>
       {children}

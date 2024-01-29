@@ -44,11 +44,11 @@ export default function Form() {
       <Input type="text" name="username" isRequired label="Username" placeholder="Enter your username"/>
       <Input type="email" name="email" isRequired label="Email" placeholder="Enter your email"/>
       <Input type="password" name="password" isRequired label="Password" placeholder="Enter your password"/>
-      <p className="flex gap-4 items-center">
+      <div className="flex gap-4 items-center">
         <Button type="submit">Submit</Button>
         {state.error && (<Chip color="danger">{state.error}</Chip>)}
         {state.success && (<Chip color="success">Successfully registered!</Chip>)}
-      </p>
+      </div>
     </form>
   )
 }

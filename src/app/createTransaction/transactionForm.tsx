@@ -5,6 +5,7 @@ import {Button} from "@nextui-org/button";
 import {Input, Chip} from "@nextui-org/react";
 import {createTransaction} from "@/api/createTransaction";
 import {useRef} from "react";
+import {useToken} from "@/hooks/useToken";
 
 interface FormState {
   error: string
@@ -13,12 +14,13 @@ interface FormState {
 
 export default function Form() {
   const formRef = useRef<HTMLFormElement>(null);
+  const {token} = useToken();
   const [state, formAction] = useFormState<FormState, FormData>(async (state, formData) => {
     try {
       await createTransaction(
         formData.get('name') as string,
         formData.get('amount')  as string,
-        localStorage.getItem('token') ?? ''
+        token
       )
       formRef.current?.reset();
       return {

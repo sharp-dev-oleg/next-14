@@ -1,7 +1,7 @@
 'use client';
 
 import {Button} from "@nextui-org/button";
-import {Input} from "@nextui-org/react";
+import {Chip, Input} from "@nextui-org/react";
 import {login, LoginResponse} from "@/api/login";
 import {useFormState} from "react-dom";
 
@@ -39,9 +39,10 @@ export default function Login({ onLogin }: LoginProps) {
     <form className="flex w-full md:w-1/2 flex-wrap gap-4" action={formAction}>
       <Input type="email" name="email" isRequired label="Email" placeholder="Enter your email"/>
       <Input type="password" name="password" isRequired label="Password" placeholder="Enter your password"/>
-      <p className="flex gap-4 items-center">
+      <div className="flex gap-4 items-center">
         <Button type="submit" color="primary">Login</Button>
-      </p>
+        {state.error && (<Chip color="danger">{state.error}</Chip>)}
+      </div>
     </form>
   )
 }
