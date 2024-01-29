@@ -9,12 +9,22 @@ import {
 import {Button} from "@nextui-org/button";
 import {useCallback, useEffect, useState} from "react";
 import Link from "next/link";
+import NavbarUser from "@/app/navbarUser";
+import {getUserInfo, UserInfo} from "@/app/api/userInfo";
 
 export default function Navbar() {
   const [token, setToken] = useState('');
+  const [userInfo, setUserInfo] = useState<UserInfo>();
 
   useEffect(() => {
-    setToken(localStorage.getItem('token') ?? '');
+    const token = localStorage.getItem('token') ?? '';
+    setToken(token);
+
+    (async () => {
+      if (token) {
+        setUserInfo((await getUserInfo(token)).user_info_token);
+      }
+    })();
   }, []);
 
   const exit = useCallback(() => {
@@ -42,6 +52,9 @@ export default function Navbar() {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
+        <NavbarItem>
+          <NavbarUser userInfo={userInfo} />
+        </NavbarItem>
         <NavbarItem>
           <Button onClick={exit} color="primary" href="#" variant="flat">Exit</Button>
         </NavbarItem>

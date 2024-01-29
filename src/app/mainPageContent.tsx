@@ -6,7 +6,6 @@ import {Divider} from "@nextui-org/react";
 import Link from "next/link";
 import Login from "./login";
 import {Transactions} from "./transactions";
-import {getUserInfo} from "@/app/api/userInfo";
 
 export default function MainPageContent() {
   const [token, setToken] = useState('');
@@ -17,8 +16,6 @@ export default function MainPageContent() {
       (async () => {
         const transactions = await getTransactions(token);
         setTransactions(transactions?.trans_token ?? [])
-
-        console.log(await getUserInfo(token));
       })();
     }
 
