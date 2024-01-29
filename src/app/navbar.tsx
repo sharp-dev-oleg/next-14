@@ -30,33 +30,46 @@ export default function Navbar() {
     location.reload();
   }, []);
 
-  if (!token) return null;
-
   return (
     <NextUiNavbar>
       <NavbarBrand>
         <p className="font-bold text-inherit">Transactions</p>
       </NavbarBrand>
       <NavbarContent className="gap-4" justify="center">
+        {token ? <>
+            <NavbarItem>
+              <Link color="foreground" href="/">
+                List
+              </Link>
+            </NavbarItem>
+            <NavbarItem>
+              <Link color="foreground" href="/createTransaction">
+                New transaction
+              </Link>
+            </NavbarItem>
+        </> : <>
         <NavbarItem>
           <Link color="foreground" href="/">
-            List
+            Login
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="/createTransaction">
-            New transaction
+          <Link color="success" href="/register">
+            Register
           </Link>
         </NavbarItem>
+      </>}
       </NavbarContent>
-      <NavbarContent justify="end">
-        <NavbarItem>
-          <NavbarUser userInfo={userInfo} />
-        </NavbarItem>
-        <NavbarItem>
-          <Button onClick={exit} color="primary" href="#" variant="flat">Exit</Button>
-        </NavbarItem>
-      </NavbarContent>
+      {token && (
+        <NavbarContent justify="end">
+          <NavbarItem>
+            <NavbarUser userInfo={userInfo} />
+          </NavbarItem>
+          <NavbarItem>
+            <Button onClick={exit} color="primary" href="#" variant="flat">Exit</Button>
+          </NavbarItem>
+        </NavbarContent>
+      )}
     </NextUiNavbar>
   );
 }

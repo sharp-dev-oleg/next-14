@@ -8,6 +8,7 @@ import {register} from '@/api/register';
 
 interface FormState {
   error: string
+  success: boolean
 }
 
 export default function Form() {
@@ -19,18 +20,23 @@ export default function Form() {
         formData.get('email') as string,
         formData.get('password') as string
       );
-      router.push('/');
+      setTimeout(() => {
+        router.push('/');
+      }, 3000);
       return {
-        error: ''
+        error: '',
+        success: true
       };
     }
     catch(e) {
       return {
-        error: (e as Error)?.message ?? 'Unknown error'
+        error: (e as Error)?.message ?? 'Unknown error',
+        success: false
       }
     }
   }, {
-    error: ''
+    error: '',
+    success: false
   });
 
   return (
@@ -41,6 +47,7 @@ export default function Form() {
       <p className="flex gap-4 items-center">
         <Button type="submit">Submit</Button>
         {state.error && (<Chip color="danger">{state.error}</Chip>)}
+        {state.success && (<Chip color="success">Successfully registered!</Chip>)}
       </p>
     </form>
   )
