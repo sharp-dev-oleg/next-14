@@ -14,7 +14,7 @@ import {getUserInfo, UserInfo} from "@/api/userInfo";
 import {useToken} from "@/hooks/useToken";
 
 export default function Navbar() {
-  const {token} = useToken();
+  const {token, setToken} = useToken();
   const [userInfo, setUserInfo] = useState<UserInfo>();
 
   useEffect(() => {
@@ -27,8 +27,8 @@ export default function Navbar() {
 
   const exit = useCallback(() => {
     localStorage.removeItem('token');
-    location.reload();
-  }, []);
+    setToken('');
+  }, [setToken]);
 
   return (
     <NextUiNavbar>
